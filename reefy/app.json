@@ -18,6 +18,7 @@
     "/run",
     "/tmp"
   ],
+  "cgroupns": "host",
   "volumes": {
     "home": {
       "mount": "/root",
