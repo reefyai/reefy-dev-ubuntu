@@ -1,0 +1,38 @@
+{
+  "slug": "dev-ubuntu",
+  "version": "24.04",
+  "name": "Dev Ubuntu",
+  "icon": "/static/icons/dev-ubuntu.png",
+  "description": "Ubuntu 24.04 development environment with systemd, KVM passthrough, and host /dev",
+  "image": "ghcr.io/reefyai/reefy-dev-ubuntu:24.04",
+  "default_port": 8080,
+  "privileged": true,
+  "devices": [
+    "/dev/kvm"
+  ],
+  "host_mounts": [
+    "/dev:/dev",
+    "/sys/fs/cgroup:/sys/fs/cgroup:rw"
+  ],
+  "tmpfs": [
+    "/run",
+    "/tmp"
+  ],
+  "volumes": {
+    "home": {
+      "mount": "/root",
+      "uid": 0,
+      "backup": [
+        "borgbase"
+      ]
+    },
+    "build": {
+      "mount": "/build",
+      "uid": 0
+    }
+  },
+  "env": {},
+  "tags": [
+    "dev"
+  ]
+}
