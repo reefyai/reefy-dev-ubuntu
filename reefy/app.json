@@ -4,7 +4,7 @@
   "name": "Dev Ubuntu",
   "icon": "/static/icons/dev-ubuntu.png",
   "description": "Ubuntu 24.04 development environment with systemd, KVM passthrough, and host /dev",
-  "image": "ghcr.io/reefyai/reefy-dev-ubuntu:24.04",
+  "image": "ghcr.io/reefyai/reefy-dev-ubuntu:24.04-2026.04.27-2",
   "default_port": 8080,
   "privileged": true,
   "devices": [
@@ -29,6 +29,14 @@
     },
     "build": {
       "mount": "/build",
+      "uid": 0
+    },
+    "docker": {
+      "mount": "/var/lib/docker",
+      "uid": 0
+    },
+    "containerd": {
+      "mount": "/var/lib/containerd",
       "uid": 0
     }
   },
