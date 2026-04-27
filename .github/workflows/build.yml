@@ -27,13 +27,24 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Compute version tag
+        id: tag
+        run: |
+          # Tag: <ubuntu_version>-<YYYY.MM.DD>-<run_number>
+          # Immutable per build; same-day rebuilds get -1, -2, ... so
+          # downstream pinning can pick up rebuilds without hash games.
+          echo "version=24.04-$(date -u +%Y.%m.%d)-${{ github.run_number }}" >> "$GITHUB_OUTPUT"
+
       - uses: docker/build-push-action@v6
         with:
           context: .
           file: Dockerfile
           push: true
           tags: |
+            ghcr.io/reefyai/reefy-dev-ubuntu:${{ steps.tag.outputs.version }}
             ghcr.io/reefyai/reefy-dev-ubuntu:24.04
             ghcr.io/reefyai/reefy-dev-ubuntu:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      - run: echo "Pushed ghcr.io/reefyai/reefy-dev-ubuntu:${{ steps.tag.outputs.version }}"

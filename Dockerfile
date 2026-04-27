@@ -1,14 +1,16 @@
 # reefy-dev-ubuntu: Ubuntu 24.04 with systemd as PID 1.
 #
-# Used by the dev-ubuntu Reefy app to give the container a full-VM-like
-# experience: udev for partition device nodes, cron, sshd as a unit,
-# journald, etc. Build/e2e dependencies stay in tools/dev-host/setup.sh
-# (NOT baked here) so this image rebuilds rarely and per-user
-# customisation has one source of truth.
+# Gives the container a full-VM-like experience: systemd unit
+# management, journald, sshd, cron, udev, and basic CLI tools
+# (ip/ss/ping/sudo/less/vim/jq/curl) so a fresh shell feels like a
+# Linux box rather than a stripped container.
 #
-# Pattern follows jrei/systemd-ubuntu but vendored into our own org so
-# the supply chain stays under our control. CI rebuilds on push to main
-# touching this file (.github/workflows/dev-ubuntu-image.yml).
+# Heavier build/dev deps (gcc, make, qemu, parted, mtools, ...) are NOT
+# baked here - they belong in the consuming project's setup script so
+# this image rebuilds rarely.
+#
+# Pattern follows jrei/systemd-ubuntu but vendored to our org so the
+# supply chain stays under our control. CI rebuilds on Dockerfile change.
 
 FROM ubuntu:24.04
 
@@ -21,7 +23,11 @@ ENV container=docker \
     DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends systemd systemd-sysv \
+    && apt-get install -y --no-install-recommends \
+        systemd systemd-sysv \
+        sudo less vim jq curl tmux nano \
+        iproute2 iputils-ping net-tools \
+        ca-certificates openssh-client \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
