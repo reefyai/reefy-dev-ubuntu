@@ -25,9 +25,9 @@ ENV container=docker \
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         systemd systemd-sysv \
-        sudo less vim jq curl tmux nano \
+        sudo less vim jq curl tmux nano git \
         iproute2 iputils-ping net-tools \
-        ca-certificates openssh-client \
+        ca-certificates openssh-client openssh-sftp-server \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
