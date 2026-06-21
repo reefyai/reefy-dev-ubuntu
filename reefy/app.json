@@ -1,16 +1,16 @@
 {
   "slug": "dev-ubuntu",
-  "version": "24.04-2026.06.21-8",
+  "version": "24.04-2026.06.21-9",
   "name": "Dev Ubuntu",
   "icon": "/static/icons/dev-ubuntu.png",
   "description": "Ubuntu 24.04 development environment with systemd, KVM passthrough, and host /dev",
-  "image": "ghcr.io/reefyai/reefy-dev-ubuntu:24.04-2026.06.21-8",
+  "image": "ghcr.io/reefyai/reefy-dev-ubuntu:24.04-2026.06.21-9",
   "releases": [
+    "ghcr.io/reefyai/reefy-dev-ubuntu:24.04-2026.06.21-9",
     "ghcr.io/reefyai/reefy-dev-ubuntu:24.04-2026.06.21-8",
     "ghcr.io/reefyai/reefy-dev-ubuntu:24.04-2026.06.20-7",
     "ghcr.io/reefyai/reefy-dev-ubuntu:24.04-2026.05.10-6",
-    "ghcr.io/reefyai/reefy-dev-ubuntu:24.04-2026.05.09-5",
-    "ghcr.io/reefyai/reefy-dev-ubuntu:24.04-2026.04.27-2"
+    "ghcr.io/reefyai/reefy-dev-ubuntu:24.04-2026.05.09-5"
   ],
   "privileged": true,
   "gpu": true,
