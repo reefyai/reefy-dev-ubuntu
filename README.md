@@ -33,7 +33,7 @@ systemd-as-PID-1 needs cgroup access + tmpfs for `/run` and `/tmp`:
 docker run -d \
   --privileged \
   -v /sys/fs/cgroup:/sys/fs/cgroup:rw \
-  --tmpfs /run --tmpfs /tmp \
+  --tmpfs /run --tmpfs /tmp:exec,mode=1777 \
   ghcr.io/reefyai/reefy-dev-ubuntu:24.04
 ```
 
